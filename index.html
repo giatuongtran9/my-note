@@ -16,19 +16,17 @@
 
         <script>
             const fs = new Filer.FileSystem();
-            var content = document.getElementById("text");
 
             window.addEventListener('DOMContentLoaded', (event) => {
                 console.log('DOM fully loaded and parsed');
-                
-                content.innerHTML = "Nothing here type in something";
 
                 fs.readFile('/note', 'utf8', function(err, data) 
                 {
+                    var content = document.getElementById("text");
                     if (err)
                     {
                         console.log("Welcome to my notepad!");
-                        content.innerHTML = "Error";
+                        content.innerHTML = "Nothing here type in something";
                         console.log(err);
                     }
 
