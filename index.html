@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" />
+        <title>My Note</title>
+    </head>
+
+    <body>
+        <h1>My Note - Lab 2</h1>
+        <p>bla bla</p>
+
+        <div contenteditable="true" id="text"></div>
+
+        <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
+
+        <script>
+            const fs = new Filer.FileSystem();
+            var content = document.getElementById("text");
+
+            window.addEventListener('DOMContentLoaded', (event) => {
+                console.log('DOM fully loaded and parsed');
+                
+                content.innerHTML = "Nothing here type in something";
+
+                fs.readFile('/note', 'utf8', function(err, data) 
+                {
+                    var content = document.getElementById("text");
+                    if (err)
+                    {
+                        console.log("Welcome to my notepad!");
+                        content.innerHTML = "Error";
+                        console.log(err);
+                    }
+
+                    if (data)
+                    {
+                        console.log("Loaded");
+                        content.innerHTML = data;
+                    }
+                    
+                })
+            });
+
+            function save() {
+                var newString = document.getElementById("text").innerHTML;
+                fs.writeFile("/note", newString, (err) => {
+                    if (err) {
+                        console.log("There is some errors");
+                    }
+                    else {
+                        console.log("Saved ", newString);
+                    }
+                });
+            }
+
+            var intervalID = window.setInterval(save, 500);
+        </script>
+    </body>
+</html>
