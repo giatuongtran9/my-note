@@ -16,15 +16,15 @@
 
     <body>
         <h1 style="text-align: center;">My-Note - Lab 2</h1>
-        <h2 style="text-align: center;">Welcome to my Notepad</h2>
+        <h2 style="text-align: center;">Welcome to my Notepad</h2><br/>
 
-        <p style="text-align: center;">Write your note down here and Ctrl+s to save</p><br/>
+        <p style="text-align: center;">Write your note down here and Ctrl+s to save</p>
         <div contenteditable="true" id="text"></div>
-
+        
         <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
         <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
         <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
-        
+
         <script>
             const fs = new Filer.FileSystem();
 
@@ -42,7 +42,7 @@
                     if (err)
                     {
                         console.log("Welcome to my notepad!");
-                        content.innerHTML = "Type in something here...";
+                        content.innerHTML = "...";
                         console.log(err);
                     }
 
