@@ -13,7 +13,8 @@
         <div contenteditable="true" id="text"></div>
 
         <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
-
+        <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
+        
         <script>
             const fs = new Filer.FileSystem();
 
@@ -39,6 +40,17 @@
                 })
             });
 
+            hotkeys.filter = function (event) {
+                var tagName = (event.target || event.srcElement).tagName;
+                return !(tagName.isContentEditable || tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA');
+            }
+
+            hotkeys("ctrl+s", (event) => {
+                event.preventDefault();
+                save();
+                console.log("Ctrl+s");
+            });
+
             function save() {
                 var newString = document.getElementById("text").innerHTML;
                 fs.writeFile("/note", newString, (err) => {
@@ -50,8 +62,7 @@
                     }
                 });
             }
-
-            var intervalID = window.setInterval(save, 500);
+            
         </script>
     </body>
 </html>
