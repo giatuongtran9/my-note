@@ -19,7 +19,7 @@
         <h2 style="text-align: center;">Welcome to my Notepad</h2><br/>
 
         <p style="text-align: center;">Write your note down here and Ctrl+s to save</p>
-        <div contenteditable="true" id="text"></div>
+        <div id="text"></div>
         
         <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
         <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
@@ -42,14 +42,14 @@
                     if (err)
                     {
                         console.log("Welcome to my notepad!");
-                        content.innerHTML = "...";
+                        editor.setText("...");;
                         console.log(err);
                     }
 
                     if (data)
                     {
                         console.log("Loaded");
-                        content.innerHTML = data;
+                        editor.setContents(JSON.parse(data));
                     }
                     
                 })
@@ -67,7 +67,7 @@
             });
 
             function save() {
-                var newString = document.getElementById("text").innerHTML;
+                var newString = JSON.stringify(editor.getContents());
                 fs.writeFile("/note", newString, (err) => {
                     if (err) {
                         console.log("There is some errors");
